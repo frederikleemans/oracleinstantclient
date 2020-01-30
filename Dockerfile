@@ -75,8 +75,8 @@ RUN  yum -y install oracle-release-el7 && yum-config-manager --enable ol7_oracle
 # Uncomment if the tools package is added
 # ENV PATH=$PATH:/usr/lib/oracle/${release}.${update}/client64/bin
 
-RUN addgroup oracle \
-    && adduser -G oracle -HD -s /bin/false oracle \
+RUN groupadd oracle \
+    && useradd -G oracle -HD -s /bin/false oracle \
     && mkdir /dumps \
     && chown oracle:oracle /dumps
 
