@@ -75,4 +75,15 @@ RUN  yum -y install oracle-release-el7 && yum-config-manager --enable ol7_oracle
 # Uncomment if the tools package is added
 # ENV PATH=$PATH:/usr/lib/oracle/${release}.${update}/client64/bin
 
+RUN addgroup oracle \
+    && adduser -G oracl -HD -s /bin/false oracle \
+    && mkdir /dumps \
+    && chown oracle:oracle /dumps
+
+USER oracle
+
+WORKDIR /dumps
+
+VOLUME [ "/dumps" ]
+
 CMD ["sqlplus", "-v"]
